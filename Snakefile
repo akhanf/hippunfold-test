@@ -41,13 +41,15 @@ rule run_hippunfold_subject:
         bids='datasets/{dataset}'
     params:
         container=lambda wildcards: config['versions'][wildcards.version]['container'],
-        modality=lambda wildcards: config['datasets'][wildcards.dataset]['modality']
+        version_opts=lambda wildcards: config['versions'][wildcards.version]['version_opts'],
+        dataset_opts=lambda wildcards: config['datasets'][wildcards.dataset]['dataset_opts'],
     output:
         directory('hippunfold/{version}/{dataset}/sub-{subject}')
     threads: 16
     shell:
-        'singularity run -e {params.container} {input.bids} {output} participant --participant-label {wildcards.subject} '
-        ' --modality {params.modality} -c {threads}'
+        'singularity run -e {params.container} {input.bids} {output} '
+        ' participant --participant-label {wildcards.subject} '
+        ' {params.dataset_opts} {params.version_opts} -c {threads}'
 
 
 

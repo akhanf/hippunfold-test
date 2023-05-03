@@ -11,14 +11,20 @@ datasets:
         subject: 
           - 1425
           - 1428
-    modality: T2w
+    dataset_opts: '--modality T2w --t1-reg-template' 
 
 
 versions:
   v1.2.0: 
     container: /srv/containers/hippunfold_v1.2.0.sif
+    version_opts: '--keep-work'
   v1.2.1: 
     container: /srv/containers/hippunfold_v1.2.1.sif
+    version_opts: '--keep-work'
   v1.2.1-synthseg: 
     container: /srv/containers/hippunfold_v1.2.1_synthsegmodelonly.sif
+    version_opts: '--keep-work --force-nnunet-model synthseg'
+  unfold_reg:
+    container: /cifs/khan/shared/containers/singularity/hippunfold_unfold_reg.sif
+    version_opts: '--keep-work'
 
